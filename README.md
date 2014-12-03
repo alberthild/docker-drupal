@@ -53,9 +53,15 @@ sudo docker build -t <yourname>/drupal git://github.com/ricardoamaro/docker-drup
 
 ### Credentials
 
-* ROOT   MYSQL_PASSWORD will be on /mysql-root-pw.txt
-* DRUPAL MYSQL PASSWORD will be on /drupal-db-pw.txt
-* Drupal account-name=admin & account-pass=admin
+you can fetch all the variables with 
+```
+docker exec drupal-web env
+```
+so the variables of your need will be
+* DB_PORT_3306_TCP_ADDR (address to mysql server)
+* DB_PORT_3306_TCP_PORT (port to mysql server)
+* DB_ENV_MYSQL_DATABASE (mysql database name)
+* DB_ENV_MYSQL_ROOT_PASSWORD (mysql root pw)
 
 
 ## More docker awesomeness
