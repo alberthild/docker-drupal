@@ -29,7 +29,7 @@ this can take a while but should eventually return a command prompt. It's done w
 
 ## create data volume
 ```
-sudo docker run -v /var/lib/mysql -v /var/www/sites/all -v /var/www/sites/default/files --name drupal-data busybox true
+sudo docker run -v /var/lib/mysql -v /var/www/sites -v /var/ressources --name drupal-data busybox true
 ```
 ## run mysql
 ```

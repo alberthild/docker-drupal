@@ -26,6 +26,8 @@ ADD ./supervisord.conf /etc/supervisord.conf
 # Retrieve drupal
 RUN drush dl $DRUPAL --destination=/var/ --drupal-project-rename=www -y
 RUN chmod a+w /var/www/sites/default ; mkdir /var/www/sites/default/files ; chown -R www-data:www-data /var/www/
+# backup default settings file (need it for install when using linked volumes)
+RUN cp /var/www/sites/default/default.settings.php ./
 
 RUN chmod 755 /start.sh /etc/apache2/foreground.sh
 EXPOSE 80
