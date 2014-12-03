@@ -17,7 +17,7 @@ if [ ! -f /var/www/sites/default/settings.php ]; then
 	sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/sites-available/default
 	a2enmod rewrite vhost_alias
 	cd /var/www/
-	drush site-install standard -y --account-name=admin --account-pass=admin --db-url="mysqli://drupal:${DRUPAL_PASSWORD}@localhost:3306/drupal"
+	drush site-install $DRUPAL_PROFILE -y --account-name=admin --account-pass=admin --db-url="mysqli://drupal:${DRUPAL_PASSWORD}@localhost:3306/drupal"
 	killall mysqld
 	sleep 10s
 fi

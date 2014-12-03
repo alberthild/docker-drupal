@@ -6,6 +6,7 @@ FROM    debian:wheezy
 MAINTAINER Ricardo Amaro <mail_at_ricardoamaro.com>
 
 ENV DRUPAL drupal-6.34
+ENV DRUPAL_PROFILE default
 
 #RUN echo "deb http://archive.ubuntu.com/ubuntu saucy main restricted universe multiverse" > /etc/apt/sources.list
 RUN apt-get update
