@@ -5,6 +5,8 @@
 FROM    debian:wheezy
 MAINTAINER Ricardo Amaro <mail_at_ricardoamaro.com>
 
+ENV DRUPAL drupal-6.34
+
 #RUN echo "deb http://archive.ubuntu.com/ubuntu saucy main restricted universe multiverse" > /etc/apt/sources.list
 RUN apt-get update
 #RUN apt-get -y upgrade
@@ -24,7 +26,7 @@ ADD ./foreground.sh /etc/apache2/foreground.sh
 ADD ./supervisord.conf /etc/supervisord.conf
 
 # Retrieve drupal
-RUN rm -rf /var/www/ ; cd /var ; drush dl drupal ; mv /var/drupal*/ /var/www/
+RUN drush dl $DRUPAL --destination=/var/ --drupal-project-rename=www -y
 RUN chmod a+w /var/www/sites/default ; mkdir /var/www/sites/default/files ; chown -R www-data:www-data /var/www/
 
 RUN chmod 755 /start.sh /etc/apache2/foreground.sh
