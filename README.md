@@ -27,9 +27,17 @@ sudo docker build -t <yourname>/drupal .
 
 this can take a while but should eventually return a command prompt. It's done when it says "Successfully built {hash}"
 
-## And run the container, connecting port 80:
+## create data volume
 ```
-sudo docker run -d -t -p 80:80 <yourname>/drupal
+sudo docker run -v /var/lib/mysql -v /var/www/sites/all -v /var/www/sites/default/files --name drupal-data busybox true
+```
+## run mysql
+```
+sudo docker run --name drupal-mysql --volumes-from drupal-data --restart on-failure:5 -e MYSQL_ROOT_PASSWORD=mysecretpassword -e MYSQL_DATABASE=drupal -d mysql
+```
+## And now the container, connecting port 80:
+```
+sudo docker run -d -t -p 80:80 --name drupal-web --volumes-from drupal-data --link drupal-mysql:db <yourname>/drupal
 ```
 That's it!
 Visit http://localhost/ in your webrowser. 
